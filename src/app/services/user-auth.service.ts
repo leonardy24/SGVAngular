@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Usuario } from '../modelo/Usuario';
 import { Producto } from '../modelo/Producto';
 import { Venta } from '../modelo/Venta';
+import { ProductoExistencia } from '../modelo/ProductoExistencia';
 
 
 @Injectable({
@@ -27,6 +28,11 @@ export class UserAuthService {
       return this.http.get<Producto>(`${this.API_URL}/buscador/${codigo}`);
    }
 
+
+   
+   getProductoStock(codigo: number){
+      return this.http.get<ProductoExistencia>(`${this.API_URL}/buscadorStock/${codigo}`);
+   }
 
    getRegistroVenta(venta: Venta){
 

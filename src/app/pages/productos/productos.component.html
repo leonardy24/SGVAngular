@@ -1,0 +1,68 @@
+<app-header></app-header>
+
+<main>
+    <h3>Productos</h3>
+
+    <form [formGroup]="codidoForm" (submit)="buscarCodigo()">
+        <label for="codigo">codigo:</label>
+        <input type="number" id="cod" name="cod" formControlName="codigo">
+        <button type="submit">Buscar</button>
+
+    </form><br>
+
+
+</main>
+
+<article id="tablaArticle">
+
+  <div class="tabla-contenedor">
+    <table class="tabla-productos">
+      <thead>
+        <tr>
+          <th>Eliminar</th>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>Cantidad</th>
+          <th>Precio venta</th>
+          <th>Precio costo</th>
+        </tr>
+      </thead>
+      <tbody>
+  
+  
+          @for (producto of productosExistencia; track $index) {
+                          
+            <tr>
+              <td >
+                <img src="borrar.png" alt="" width="30" height="30" (click)="eliminar($index)" style="cursor: pointer;">
+              </td>
+              <td contenteditable="true">
+                {{producto.codigo}}
+              </td>
+              <td contenteditable="true">
+                {{producto.nomProducto}}
+              </td>   
+              <td contenteditable="true">
+                  {{producto.cantidad}}
+              </td>
+              <td contenteditable="true">
+                {{producto.precioVenta}}
+              </td>
+              <td contenteditable="true">
+                {{producto.precioCosto}}
+              </td>
+            </tr>
+              
+            }
+        
+       
+      </tbody>
+    </table>
+
+  </div>
+  
+
+</article>
+
+
+  

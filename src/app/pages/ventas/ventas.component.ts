@@ -3,7 +3,7 @@ import { HeaderComponent } from '../../componentes/header/header.component';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserAuthService } from '../../services/user-auth.service';
 import { Producto } from '../../modelo/Producto';
-import { ProductoVenta } from '../../modelo/ProductoVenta';
+
 import { Venta } from '../../modelo/Venta';
 
 
@@ -19,7 +19,7 @@ export class VentasComponent {
   codidoForm: FormGroup;
   codigo: FormControl;
   productos: Producto[];
-  productosVenta: ProductoVenta[];
+ 
   totalVenta: number;
   iva: number;
   efectivoCambio: number;
@@ -27,7 +27,7 @@ export class VentasComponent {
 
   constructor(public userService: UserAuthService){
     this.productos = [];
-    this.productosVenta = [];
+    
     this.codigo = new FormControl('');
     this.totalVenta = 0;
     this.iva = 0;
@@ -107,13 +107,7 @@ export class VentasComponent {
 
   }
 
-  metodoEfectivo(){
-    this.metodoDePago= "efectivo";
-  }
-
-  metodoTarjeta(){
-    this.metodoDePago= "tarjeta";
-  }
+  
   
 
 }
