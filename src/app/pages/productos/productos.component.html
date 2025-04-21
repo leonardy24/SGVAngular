@@ -27,32 +27,44 @@
           <th>Precio costo</th>
         </tr>
       </thead>
-      <tbody>
-  
-  
-          @for (producto of productosExistencia; track $index) {
-                          
-            <tr>
-              <td >
-                <img src="borrar.png" alt="" width="30" height="30" (click)="eliminar($index)" style="cursor: pointer;">
-              </td>
-              <td contenteditable="true">
-                {{producto.codigo}}
-              </td>
-              <td contenteditable="true">
-                {{producto.nomProducto}}
-              </td>   
-              <td contenteditable="true">
-                  {{producto.cantidad}}
-              </td>
-              <td contenteditable="true">
-                {{producto.precioVenta}}
-              </td>
-              <td contenteditable="true">
-                {{producto.precioCosto}}
-              </td>
-            </tr>
+      <tbody> 
+        
+        @if (productosExistencia.codigo != 0) {
+          <tr>
+            <td >
+              <img src="borrar.png" alt="" width="30" height="30" (click)="eliminar(productosExistencia.idProductos)" style="cursor: pointer;">
+            </td>
+            <td contenteditable="true" (blur)="guardarCambioLocal(productosExistencia, $event, 'codigo')">
+              {{productosExistencia.codigo}}
+            </td>
+            <td contenteditable="true" (blur)="guardarCambioLocal(productosExistencia, $event, 'nomProducto')">
+              {{productosExistencia.nomProducto}}
+            </td>   
+            <td contenteditable="true" (blur)="guardarCambioLocal(productosExistencia, $event, 'cantidad')">
+                {{productosExistencia.cantidad}}
+            </td>
+            <td contenteditable="true" (blur)="guardarCambioLocal(productosExistencia, $event, 'precioVenta')">
+              {{productosExistencia.precioVenta}}
+            </td>
+            <td contenteditable="true" (blur)="guardarCambioLocal(productosExistencia, $event, 'precioCosto')">
+              {{productosExistencia.precioCosto}}
+            </td>
+          </tr>
+        }
+            
               
+            
+
+            @for (item of getArray(6) ; track $index) {
+
+              <tr class="paddintd">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
             }
         
        
@@ -61,6 +73,12 @@
 
   </div>
   
+
+</article>
+
+
+<article>
+  <button (click)="guardar()">guardar</button>
 
 </article>
 

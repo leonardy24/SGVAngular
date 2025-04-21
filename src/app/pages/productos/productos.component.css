@@ -30,3 +30,7 @@ main{
     background-color: white;
     z-index: 2;
   }
+
+  .paddintd td{
+    padding: 20px;
+}

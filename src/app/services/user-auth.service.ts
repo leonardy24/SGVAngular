@@ -22,6 +22,16 @@ export class UserAuthService {
       return this.http.post<any>(`${this.API_URL}/login`, usu);
    }
 
+   postUpdateProducto(productoActualizado: ProductoExistencia){
+      return this.http.post<any>(`${this.API_URL}/actualizarProducto`,productoActualizado)
+   }
+
+   deleteProducto(idProductoEliminar: number){
+
+      
+      return this.http.delete(`${this.API_URL}/productoEliminar/${idProductoEliminar}`)
+   }
+
    //GET para verificar si existe el codigo en la base de de datos
    
    getProducto(codigo: number){
