@@ -1,0 +1,130 @@
+/* estadisticas.component.css */
+.chart-container {
+  position: relative; /* A veces necesario para que Chart.js calcule bien el tamaño */
+  width: 70%;       /* El gráfico ocupará el 70% del ancho de su contenedor padre (main) */
+  max-width: 1000px; /* Pero no más de 600px de ancho */
+  margin: 20px auto;  /* Para centrarlo y darle un poco de espacio vertical */
+  /* Puedes añadir un height si quieres, pero con responsive:true y maintainAspectRatio:true (por defecto),
+     la altura se ajustará según el ancho y el aspect ratio. */
+}
+.estadisticas-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Espacio entre las tarjetas */
+}
+
+.filtro-card, .resultados-card, .grafico-card {
+  width: 100%;
+}
+
+/* Estilos para el formulario dentro de la tarjeta */
+.filtro-card mat-form-field {
+  width: 100%;
+  max-width: 500px; /* O el ancho que prefieras para el selector de fecha */
+  margin-bottom: 10px;
+}
+
+.filtro-card mat-card-actions {
+  padding-right: 16px; /* Para alinear mejor los botones */
+  padding-bottom: 16px;
+}
+
+.filtro-card mat-card-actions button {
+  margin-left: 8px;
+}
+
+/* Estilos para la tabla */
+.table-container {
+  overflow-x: auto; /* Para responsive en tablas anchas */
+}
+
+table.mat-table {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.columna-monto {
+  text-align: right; /* Alinear montos a la derecha */
+  padding-right: 16px !important; /* Añadir padding para que no se pegue al borde */
+}
+
+th.mat-header-cell.columna-monto {
+    text-align: right;
+    padding-right: 16px !important;
+}
+
+
+/* Mensaje de "No resultados" */
+.sin-resultados {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+  color: #757575; /* Un gris suave */
+  border: 2px dashed #e0e0e0;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.sin-resultados mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+}
+
+.sin-resultados p {
+  font-size: 1.1em;
+  margin: 0;
+}
+
+
+/* Contenedor del gráfico (si lo usas) */
+.chart-container {
+  position: relative;
+  height: 300px; /* O el alto que necesites */
+  width: 100%;
+  max-width: 700px; /* O el ancho que necesites */
+  margin: 0 auto;
+}
+
+/* Para pantallas pequeñas, apilar las tarjetas si es necesario */
+@media (max-width: 768px) {
+  .filtro-card mat-form-field {
+    max-width: 100%;
+  }
+}
+
+.filtro-card mat-form-field.date-range-form-field { /* Asegura que este estilo aplique */
+  width: 100%;
+  max-width: 450px; /* O el ancho que prefieras */
+  display: block; /* Para que el max-width funcione bien */
+  margin-bottom: 10px;
+}
+
+/* Para el botón en el header de la tarjeta de resultados */
+.resultados-card mat-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+
+/* Contenedor para el nuevo gráfico mensual */
+.chart-container-mensual {
+  position: relative;
+  height: 350px; /* Define una altura para el gráfico */
+  width: 100%;   /* Ocupará el ancho de la tarjeta */
+}
+
+/* Ajustes generales para tarjetas */
+.filtro-card, .resultados-card, .grafico-card {
+  margin-bottom: 20px; /* Espacio entre tarjetas */
+}

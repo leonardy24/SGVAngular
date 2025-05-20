@@ -1,0 +1,177 @@
+<app-header></app-header>
+
+<main>
+
+
+
+    <h3>Ventas de productos</h3>
+
+    <form [formGroup]="codidoForm" (submit)="buscarCodigo()">
+        <label for="codigo">codigo:</label>
+        <input type="number" id="cod" name="cod" formControlName="codigo">
+        <button type="submit">Buscar</button>
+
+    </form><br>
+
+    <article id="tablaArticle">
+        <div class="tabla-contenedor">
+            <table class="tabla-productos">
+              <thead>
+                <tr>
+                  <th>Eliminar</th>
+                  <th>Código</th>
+                  <th>Nombre</th>
+                  <th>Cantidad</th>
+                  <th>Precio Unitario</th>
+                  <th>Precio Total</th>
+                </tr>
+              </thead>
+              <tbody>
+
+
+                @for (producto of productos; track $index) {
+                        
+                  <tr>
+                    <td >
+                      <img src="borrar.png" alt="" width="30" height="30" (click)="eliminar($index)" style="cursor: pointer;">
+                    </td>
+                    <td>{{producto.codigo}}</td>
+                    <td>{{producto.nomProducto}}</td>   
+                    <td>
+                        <input type="number" [(ngModel)]="producto.cantidad" (ngModelChange)="totalVenta = getTotalVenta()">
+                    </td>
+                    <td>{{producto.precio}}</td>
+                    <td>{{producto.precio*producto.cantidad}}</td>
+                  </tr>
+                  
+                }
+                <tr class="paddintd">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr class="paddintd">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr class="paddintd">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr class="paddintd">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr class="paddintd">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr class="paddintd">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr class="paddintd">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+              </tbody>
+            </table>
+        </div><br>
+    </article>
+    
+
+      <div>
+            <form class="buttonEfectivo-Tarjeta">
+                <button (click)="metodoDePago = 'efectivo'">
+                    <img src="billete.png" alt="Efectivo" width="150" height="100">
+                </button>
+                <button (click)="metodoDePago = 'tarjeta'">
+                    <img src="tarjetaCredito.png" alt="Efectivo" width="150" height="100">
+                </button>
+                
+            </form>
+
+        
+            
+            
+
+            <div class="iva">
+                <div class="iva-item">
+                    <h2>Iva:</h2>
+                    <h3>{{geIvaTotal()}}</h3>
+                </div>
+                <div class="iva-item">
+                    <h2>Total:</h2>
+                    <h3>{{totalVenta}}</h3>
+                </div>
+            </div>
+
+
+            
+
+            @if (metodoDePago == "tarjeta") {
+
+                <form class="form-cambio">
+                    <label for="efectivo">Efectivo:</label>
+                    <input type="number" id="efectivo" name="efectivo" value="0" [disabled]="true">
+                </form>
+
+                <div class="Cambio">
+                    <h2>Cambio:</h2>
+                    <h3>0</h3>
+                </div>
+
+            }@else if (metodoDePago == "efectivo") {
+
+                <form class="form-cambio">
+                    <label for="efectivo">Efectivo:</label>
+                    <input type="number" id="efectivo" name="efectivo" [(ngModel)]="efectivoCambio" [disabled]="false">
+                </form>
+
+                <div class="Cambio">
+                    <h2>Cambio:</h2>
+                    <h3>{{getCambio()}}</h3>
+                </div>
+            }
+
+            
+
+            <button id="pagar" (click)="pagar()" >Pagar
+                <img src="pago.png" alt="Efectivo" width="150" height="100">
+            </button><br>
+        
+
+
+      </div>
+
+
+</main>
+      
+      

@@ -1,0 +1,109 @@
+main{
+    margin: 10px;
+}
+
+  #tablaArticle{
+    margin:7px;
+    border: 1px solid #ccc;
+  }
+  
+  .tabla-contenedor {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  .tabla-productos {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .tabla-productos th,
+  .tabla-productos td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .tabla-productos thead th {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 2;
+  }
+
+  .buttonEfectivo-Tarjeta button{
+    padding: 20px 20px;
+    margin-top: 10px;
+    margin-right: 10px;
+    
+    
+  }
+
+  
+
+  .iva {
+    display: flex;             /* Usamos flexbox */
+    flex-direction: column;    /* Para apilar los elementos en columnas */
+    align-items: flex-end;     /* Alinea todo a la derecha */
+    gap: 10px;                 /* Espacio entre cada par de h2 + h3 */
+}
+
+.iva-item {
+    display: flex;             /* Los h2 y h3 estarán en una línea */
+    gap: 10px;                 /* Espacio entre h2 y h3 */
+    align-items: center;       /* Alinea h2 y h3 verticalmente */
+}
+
+.iva h3 {
+    border: 1px solid #333;    /* Borde visible */
+    padding: 20px 50px;         /* Espaciado interno para que se vea bien */
+    border-radius: 5px;        /* Bordes redondeados */
+    margin: 0;                 /* Elimina márgenes por defecto */
+}
+
+.Cambio {
+    display: flex;             /* Usamos flexbox para alinear los elementos en una línea */
+    align-items: center;       /* Alinea los elementos verticalmente al centro */
+    gap: 10px;                 /* Espacio entre h2 y h3 */
+}
+
+.Cambio h3 {
+    border: 1px solid #333;    /* Borde visible */
+    padding: 20px 50px;         /* Espaciado interno para que se vea bien */
+    border-radius: 5px;        /* Bordes redondeados (opcional) */
+    margin: 0;                 /* Elimina márgenes por defecto */
+}
+
+.form-cambio input:focus {
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.6);
+  outline: none; /* quita el borde azul clásico del navegador */
+  border: 1px solid #007bff;
+}
+
+
+.form-cambio label {
+    font-size: 24px;      /* Tamaño del texto del label */
+    font-weight: bold;    /* Opcional: negrita */
+    margin-right: 10px;   /* Espacio entre label e input */
+  }
+  
+  .form-cambio input {
+    font-size: 20px;      /* Tamaño del texto dentro del input */
+    padding: 10px 15px;   /* Espaciado interno (alto y ancho) */
+    width: 135px;         /* Ancho del input */
+    height: 45px;         /* Alto del input */
+    border-radius: 5px;   /* Bordes redondeados (opcional) */
+    border: 1px solid #ccc;
+  }
+  
+   
+
+#pagar{
+    float: right;
+    padding: 20px 20px;
+    margin-bottom: 20px;
+}
+
+.paddintd td{
+    padding: 20px;
+}

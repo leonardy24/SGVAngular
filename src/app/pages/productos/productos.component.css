@@ -1,0 +1,63 @@
+main{
+    margin: 10px;
+}
+
+  #tablaArticle{
+    margin:7px;
+    border: 1px solid #ccc;
+  }
+  
+  .tabla-contenedor {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  .tabla-productos {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .tabla-productos th,
+  .tabla-productos td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .tabla-productos thead th {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 2;
+  }
+
+.paddintd td{
+    padding: 20px;
+}
+
+.icon-rojo {
+  color: red;
+}
+
+.imgButonn{
+
+  margin-left: 0%;
+  padding-left: 0;
+}
+
+.sppp{
+  padding-bottom: 5px ;
+}
+
+.bttomm{
+   padding: 16px 32px;
+}
+
+.buttonGenerPDF{
+  position: absolute; 
+  right: 100px;
+}
+
+.buttonBuscar{
+  margin-left: 10px;
+}

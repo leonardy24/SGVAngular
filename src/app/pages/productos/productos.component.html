@@ -1,0 +1,102 @@
+
+<app-header></app-header>
+@if (cargando) {
+  <app-spinner-carga></app-spinner-carga>
+}
+<main class="container">
+  <h3 class="mat-headline">Productos</h3>
+
+  <form [formGroup]="codidoForm" class="codigo-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Código</mat-label>
+      <input matInput type="number" formControlName="codigo" />
+    </mat-form-field>
+
+    
+    <button mat-raised-button color="primary" type="button" (click)="buscarCodigo()" class="buttonBuscar">Buscar</button>
+    <!--
+    <button mat-raised-button color="primary" type="submit" class="buttonGenerPDF" style="padding-left: 30px;">
+       <img src="archivo.png" width="34" height="34" alt="PDF" style="margin-right: 15px; padding: 0;" >
+      <span style="margin-right: 30px; margin-bottom: 0px;">Generar PDF</span>
+    </button>
+    -->
+    <button mat-raised-button color="primary" type="button" (click)="generarPDF()" class="buttonGenerPDF">
+      <span style="display: flex; align-items: center;">
+      <img src="archivo.png" width="34" height="34" alt="PDF" style="margin-right: 8px;">
+      Generar PDF
+      </span>
+    </button>
+
+  </form>
+  <br />
+</main>
+
+
+<article id="tablaArticle">
+  <div class="tabla-contenedor">
+    <table class="tabla-productos mat-elevation-z2">
+      <thead>
+        <tr>
+          <th>Eliminar</th>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>Cantidad</th>
+          <th>Precio venta</th>
+          <th>Precio costo</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (productosExistencia.codigo != 0) {
+          <tr>
+            <td>
+              <button mat-icon-button color="warn" (click)="eliminar(productosExistencia.idProductos)">
+                <mat-icon class="icon-rojo">delete</mat-icon>
+              </button>
+            </td>
+            <td contenteditable="true" (blur)="guardarCambioLocal(productosExistencia, $event, 'codigo')">
+              {{productosExistencia.codigo}}
+            </td>
+            <td contenteditable="true" (blur)="guardarCambioLocal(productosExistencia, $event, 'nomProducto')">
+              {{productosExistencia.nomProducto}}
+            </td>
+            <td contenteditable="true" (blur)="guardarCambioLocal(productosExistencia, $event, 'cantidad')">
+              {{productosExistencia.cantidad}}
+            </td>
+            <td contenteditable="true" (blur)="guardarCambioLocal(productosExistencia, $event, 'precioVenta')">
+              {{productosExistencia.precioVenta}}
+            </td>
+            <td contenteditable="true" (blur)="guardarCambioLocal(productosExistencia, $event, 'precioCosto')">
+              {{productosExistencia.precioCosto}}
+            </td>
+          </tr>
+        }
+
+        @for (item of getArray(6); track $index) {
+          <tr class="paddintd">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</article>
+<!-- Spinner overlay, solo se muestra mientras loading es true -->
+
+
+<article >
+  <button mat-flat-button color="accent" (click)="guardar()" style="padding: 50px 38px; margin-left: 5px; margin-right: 5px;" >
+     <img src="disco-flexible.png" alt="guardar" height="70px" width="80px" ><br>
+    <span>Guardar</span>
+  </button>
+
+  <button mat-raised-button color="primary" (click)="agregarProducto()" style="padding: 50px 38px; margin-left: 5px; margin-right: 5px;" >
+    <img src="agregar-producto.png" alt="Agregar" height="70px" width="80px" ><br>
+    <span>Agregar Producto</span>
+  </button>
+</article>
+
