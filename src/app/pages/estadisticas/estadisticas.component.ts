@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'; // OnInit
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
-
+import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { SpinnerCargaComponent } from '../../componentes/spinner-carga/spinner-carga.component';
 // Angular Material Modules
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -21,6 +21,8 @@ import { HeaderComponent } from '../../componentes/header/header.component';
 import { UserAuthService } from '../../services/user-auth.service';
 import { Venta } from '../../modelo/Venta';
 import { VentaConFecha } from '../../modelo/VentaConFecha';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
 
@@ -43,6 +45,7 @@ Chart.register(BarController, BarElement, CategoryScale, LinearScale, Title, Too
     MatCardModule,
     MatIconModule,
     MatSnackBarModule, // Añadir MatSnackBarModule
+    SpinnerCargaComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
@@ -57,7 +60,7 @@ export class EstadisticasComponent implements OnInit {
   public ventasFiltradas: VentaConFecha[] = [];
   public displayedColumns: string[] = ['idVenta', 'metodoPago', 'fecha', 'monto', 'Iva', 'idUsuario'];
   public searchAttempted = false;
-
+  public cargando = false;
   // --- Propiedades para el Gráfico de Ventas Mensuales ---
   public showMonthlyChart = false;
   public monthlyChartOptions: ChartConfiguration['options'] = {
@@ -85,6 +88,7 @@ export class EstadisticasComponent implements OnInit {
 
   constructor(
     private _snackBar: MatSnackBar,
+    private dialog: MatDialog,
     public userService: UserAuthService,
     private snackBar: MatSnackBar) { // Inyectar MatSnackBar
     this.salesDateRangeForm = new FormGroup({
@@ -182,6 +186,57 @@ export class EstadisticasComponent implements OnInit {
     this.showMonthlyChart = false; // Ocultar gráfico
   }
 
+  generarPDFDetalleVenta():void{
+
+      
+      //this.cargando = true;
+
+      const dialogRef = this.dialog.open(DialogContentId,{
+              width: '900px',  // Ajusta el ancho del diálogo
+              height: '600px', // Ajusta la altura del diálogo
+              data: {} 
+            });
+      
+            dialogRef.afterClosed().subscribe(result => {
+              console.log('El diálogo fue cerrado');
+              // Puedes manejar después del cierre del diálogo
+            });
+
+
+/*
+        console.log(this.cargando)
+        this.userService.getGenerarPDFDetalleVenta().subscribe((data: ArrayBuffer) => {
+
+              
+              const blob = new Blob([data], { type: 'application/pdf' });
+              const url = window.URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = 'listadoVentas.pdf'; // Nombre del archivo PDF
+              a.click();
+              window.URL.revokeObjectURL(url);
+
+              this.snackBar.open('PDF descargado', 'Cerrar', {
+              duration: 5000,
+              horizontalPosition: 'right',
+              verticalPosition: 'bottom',
+            });
+              
+            this.cargando = false
+            }, (error) => {
+              
+              //console.error('Error al generar el reporte:', error);
+              this.snackBar.open('ERROR al descargar el pdf', 'Cerrar', {
+              duration: 5000,
+              horizontalPosition: 'right',
+              verticalPosition: 'bottom',
+            });
+            this.cargando = false
+            });
+  */          
+  }
+  
+
   generarGraficoVentasMensuales(): void {
     if (this.ventasFiltradas.length === 0) {
       this._snackBar.open('No hay datos filtrados para generar el gráfico.', 'Cerrar', { duration: 3000 });
@@ -228,5 +283,127 @@ export class EstadisticasComponent implements OnInit {
       ]
     };
     this.showMonthlyChart = true;
+  }
+}
+
+
+
+///COMPONENTE PARA MOSTRAR LA VENTA DE COLOCAR EL ID DE VENTA
+@Component({
+  selector: 'app-dialog-content-id',
+  standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule
+  ],
+  template: `
+    <h1 mat-dialog-title>Ingresar ID</h1>
+    <div mat-dialog-content>
+      <form [formGroup]="idForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill">
+          <mat-label>ID</mat-label>
+          <input matInput formControlName="id" type="text" required>
+        </mat-form-field>
+
+        <div mat-dialog-actions>
+          <button mat-button type="button" (click)="close()">Cerrar</button>
+          <button mat-button type="submit" [disabled]="idForm.invalid">Enviar</button>
+        </div>
+      </form>
+
+      @if (cargando) {
+        <div class="spinner-container">
+          <mat-spinner diameter="40" color="primary"></mat-spinner>
+        </div>
+      }
+    </div>
+  `,
+  styles: [`
+    mat-form-field {
+      width: 100%;
+      margin-bottom: 12px;
+    }
+
+    .spinner-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 16px;
+      margin-bottom: 16px;
+      min-height: 60px;
+    }
+  `]
+})
+export class DialogContentId {
+  idForm: FormGroup;
+  cargando = false;
+
+  constructor(
+    private fb: FormBuilder,
+    private dialogRef: MatDialogRef<DialogContentId>,
+    private snackBar: MatSnackBar,
+    public userService: UserAuthService,
+  ) {
+    this.idForm = this.fb.group({
+      id: ['', Validators.required]
+    });
+  }
+
+  onSubmit() {
+    if (this.idForm.valid) {
+      this.cargando = true;
+      const id = this.idForm.value.id;
+
+       this.userService.getGenerarPDFDetalleVenta(id).subscribe((data: ArrayBuffer) => {
+
+              
+              const blob = new Blob([data], { type: 'application/pdf' });
+              const url = window.URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = 'listadoVentas.pdf'; // Nombre del archivo PDF
+              a.click();
+              window.URL.revokeObjectURL(url);
+
+              this.snackBar.open('PDF descargado', 'Cerrar', {
+              duration: 5000,
+              horizontalPosition: 'right',
+              verticalPosition: 'bottom',
+            });
+              
+            this.cargando = false
+            }, (error) => {
+              
+              //console.error('Error al generar el reporte:', error);
+              this.snackBar.open('ERROR al descargar el pdf', 'Cerrar', {
+              duration: 5000,
+              horizontalPosition: 'right',
+              verticalPosition: 'bottom',
+            });
+            this.cargando = false
+            });
+
+      /*
+      // Aquí iría tu lógica para usar el ID ingresado, por ejemplo una llamada a API
+      setTimeout(() => {  // Simulando una petición
+        this.cargando = false;
+        this.snackBar.open(`ID ${id} enviado correctamente`, 'Cerrar', {
+          duration: 5000,
+          horizontalPosition: 'right',
+          verticalPosition: 'bottom',
+        });
+        this.close();
+      }, 1500);
+      */
+    }
+  }
+
+  close(): void {
+    this.dialogRef.close();
   }
 }

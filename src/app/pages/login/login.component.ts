@@ -3,10 +3,17 @@ import { Form, FormControl, FormGroup, ReactiveFormsModule } from '@angular/form
 import { UserAuthService } from '../../services/user-auth.service';
 import { Router } from '@angular/router'; // Importa Router
 import { HttpErrorResponse } from '@angular/common/http';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -14,6 +21,7 @@ export class LoginComponent {
     loginForm: FormGroup;
     username: FormControl;
     password : FormControl;
+    loginError: string = '';
 
     constructor(public userService: UserAuthService, public router: Router){
       this.username = new FormControl('');

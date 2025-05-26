@@ -67,14 +67,19 @@ export class UserAuthService {
    
    getGenerarPDF(){
       const headers = this.getbase64Credenciales();
-      return this.http.get(`${this.API_URL}/generarPDF/${0}`,{responseType: 'arraybuffer',headers});
+      return this.http.get(`${this.API_URL}/generarPDFProductos/${0}`,{responseType: 'arraybuffer',headers});
    }
 
-   generarPDF(codigo: number) {
+   getGenerarPDFDetalleVenta(id :number){
       const headers = this.getbase64Credenciales();
-      return this.http.get(`/generarPDF/${codigo}`, { responseType: 'arraybuffer',headers })
+      return this.http.get(`${this.API_URL}/generarPDFVenta/${id}`,{responseType: 'arraybuffer',headers});
+   }
+
+   //generarPDF(codigo: number) {
+     // const headers = this.getbase64Credenciales();
+      //return this.http.get(`/generarPDF/${codigo}`, { responseType: 'arraybuffer',headers })
       
-  }
+  //}
 
    getRegistroVenta(venta: Venta){
       const headers = this.getbase64Credenciales();

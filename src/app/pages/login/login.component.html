@@ -1,9 +1,32 @@
-<form [formGroup]="loginForm" (submit)="inSesion()">
-    <label for="username">Nombre de usuario:</label><br>
-    <input type="text" id="username" name="username" placeholder="Escribe tu nombre" formControlName="username"><br><br>
-  
-    <label for="password">Contraseña:</label><br>
-    <input type="password" id="password" name="password" placeholder="Escribe tu contraseña" formControlName="password"><br><br>
-    
-    <button type="submit">Iniciar sesión</button>
-</form>
+
+
+<div class="login-background">
+   
+
+   <!-- <img src="sgvb.png" alt="" width="700" height="800">-->
+  <mat-card class="login-card">
+    <form [formGroup]="loginForm" (ngSubmit)="inSesion()">
+      <h2 class="login-title">Iniciar Sesión</h2>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Usuario</mat-label>
+        <input matInput formControlName="username" placeholder="Escribe tu nombre">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" formControlName="password" placeholder="Escribe tu contraseña">
+      </mat-form-field>
+
+      <button mat-raised-button color="accent" type="submit" [disabled]="loginForm.invalid">
+        Iniciar sesión
+      </button>
+
+   
+      @if (loginError) {
+           <mat-error >{{ loginError }}</mat-error>
+
+      }
+    </form>
+  </mat-card>
+</div>

@@ -1,33 +1,84 @@
-header {
-    background-color: #343a40;
-    color: white;
-    padding: 10px 20px;
-    
-  }
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+.custom-toolbar {
+  background: linear-gradient(90deg, #302d2d, #039935); /* Tu degradado personalizado */
+  color: white;
+  display: flex;
+  flex-direction: column; /* Distribuye elementos en columna */
+  align-items: flex-start;
+  padding: 10px 20px;
+  height: auto;   
+  box-sizing: border-box;
+  width: 100%; /* Asegura ocupar todo el ancho */
+}
+
+.toolbar-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.app-icon {
+  font-size: 32px;
+  margin-right: 8px;
+}
+
+.app-title {
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-left: 12px;
+}
+
+.toolbar-bottom-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 12px;
+}
+
+.toolbar-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  flex-grow: 1; /* Ocupa todo el espacio disponible */
+}
+
+.toolbar-nav button {
+  color: white;
+  font-weight: 500;
+  font-size: 16px;
+  position: relative;
+  transition: all 0.3s ease;
   
-  header h1 {
-    margin: 0;
-    font-size: 24px;
-  }
+  border: none;
+}
+
+.toolbar-nav button:hover {
+  color: #f0f0f0; /* Blanco perlado real */
+  font-size: 17px;
+  transform: scale(1.05);
+}
+
+.toolbar-nav button::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background: #f0f0f0; /* Blanco perlado */
+  transition: width 0.3s;
+}
+
+.toolbar-nav button:hover::after {
+  width: 100%;
+}
+
+
+.logout-button {
+  white-space: nowrap;
   
-  .menu-navegacion {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0 0 0;
-    display: flex;
-    gap: 20px;
-  }
-  
-  .menu-navegacion li a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-  }
-  
-  .menu-navegacion li a:hover {
-    background-color: #495057;
-  }
-  
+  /* Puedes agregar más estilos aquí, por ejemplo: */
+  /* font-weight: bold; */
+}

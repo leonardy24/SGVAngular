@@ -4,5 +4,5 @@ export interface VentaConFecha {
   fecha: Date;
   totalVenta: number;
   iva:number;
-  IdUsuario:number
+  idUsuario:number
 }
