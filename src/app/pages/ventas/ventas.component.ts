@@ -11,10 +11,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatDialog } from '@angular/material/dialog';
+import { FacturaPreviewComponent } from '../../componentes/factura-preview/factura-preview.component';
 
 @Component({
   selector: 'app-ventas',
-  imports: [HeaderComponent, ReactiveFormsModule,FormsModule],
+  imports: [HeaderComponent,MatButtonModule,MatIconModule,MatButtonToggleModule, ReactiveFormsModule,FormsModule,MatFormFieldModule,MatInputModule,MatCardModule],
   standalone: true,
   templateUrl: './ventas.component.html',
   styleUrl: './ventas.component.css'
@@ -30,7 +32,7 @@ export class VentasComponent {
   efectivoCambio: number;
   metodoDePago : string;
 
-  constructor(public userService: UserAuthService){
+  constructor(public userService: UserAuthService,private dialog: MatDialog){
     this.productos = [];
     
     this.codigo = new FormControl('');
@@ -101,18 +103,21 @@ export class VentasComponent {
 
     
     this.userService.getRegistroVenta(venta).subscribe({
-      next:(data)=>{
-        
-        console.log("pago realizado", );
+       next: (pdfBlob: Blob) => {
+        const pdfUrl = URL.createObjectURL(pdfBlob);
+        this.dialog.open(FacturaPreviewComponent, {
+          data: { pdfUrl: pdfUrl },
+          width: '80%',
+          height: '90%'
+        });
       },
-      error:(e)=>{
-        console.log("pago no se realizo")
+      error: (err) => {
+        console.error("Error al registrar venta o generar factura", err);
       }
     })
 
   }
 
-  
-  
+
 
 }

@@ -5,6 +5,7 @@ import { Producto } from '../modelo/Producto';
 import { Venta } from '../modelo/Venta';
 import { ProductoExistencia } from '../modelo/ProductoExistencia';
 import { VentaConFecha } from '../modelo/VentaConFecha';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -81,10 +82,14 @@ export class UserAuthService {
       
   //}
 
-   getRegistroVenta(venta: Venta){
+   getRegistroVenta(venta: Venta): Observable<Blob> {
       const headers = this.getbase64Credenciales();
-    return this.http.post<any>(`${this.API_URL}/registroVenta`,venta,{headers});
-   }
+      return this.http.post(`${this.API_URL}/registroVenta`, venta, {
+      headers,
+      responseType: 'blob' // 👈 IMPORTANTE: indicar que esperas un blob
+  });
+}
+
 
    getbase64Credenciales(){
       const base64Credenciales = btoa(this.usuario?.username + ':' + this.usuario?.password);

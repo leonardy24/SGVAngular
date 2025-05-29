@@ -1,7 +1,7 @@
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
 
 .custom-toolbar {
-  background: linear-gradient(90deg, #302d2d, #039935); /* Tu degradado personalizado */
+  background: linear-gradient(90deg, #000000c4, #00511b); /* Tu degradado personalizado */
   color: white;
   display: flex;
   flex-direction: column; /* Distribuye elementos en columna */
