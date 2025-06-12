@@ -1,0 +1,13 @@
+mat-form-field {
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;  /* Espacio arriba */
+    margin-bottom: 16px; /* Espacio abajo */
+    min-height: 60px;
+}

@@ -1,27 +1,30 @@
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Usuario } from '../modelo/Usuario';
+
 import { Producto } from '../modelo/Producto';
 import { Venta } from '../modelo/Venta';
 import { ProductoExistencia } from '../modelo/ProductoExistencia';
 import { VentaConFecha } from '../modelo/VentaConFecha';
 import { Observable } from 'rxjs';
+import { Usu } from '../modelo/Usu';
+import { UsuarioNuevo } from '../modelo/UsuarioNuevo';
+import { UsuarioLogin } from '../modelo/UsuarioLogin';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserAuthService {
-  API_URL ='http://localhost:8080/auth';
-
-   usuario: Usuario | undefined;
+   API_URL ='http://localhost:8080/auth';
+   //API_URL = 'http://ec2-15-188-65-191.eu-west-3.compute.amazonaws.com:8080/auth'
+   usuario: UsuarioLogin | undefined;
    
   constructor(private http: HttpClient) {
    
    }
 
    //POST para verificar la existencia del usuario
-   postUser(usu: Usuario){
+   postUser(usu: UsuarioLogin){
       this.usuario= usu;
       console.log(usu.username)
       console.log(usu.password)
@@ -39,6 +42,23 @@ export class UserAuthService {
       const headers = this.getbase64Credenciales();
 
       return this.http.post<any>(`${this.API_URL}/agregarProducto`,productoNuevo,{headers})
+   }
+
+   //POST agregar usuario
+
+   postAgregaUsuario(usuario:UsuarioNuevo){
+
+      const headers = this.getbase64Credenciales();
+
+      return this.http.post<any>(`${this.API_URL}/register`,usuario,{headers})
+   }
+
+   //PUT ACTUALIZAR USUARIO
+   actualizarUsuario(id:number, usuarioActualizado:Usu){
+
+      const headers = this.getbase64Credenciales();
+
+      return this.http.put<any>(`${this.API_URL}/actualizarUsuario/${id}`,usuarioActualizado,{headers})
    }
 
    postUpdateProducto(productoActualizado: ProductoExistencia){
@@ -59,6 +79,11 @@ export class UserAuthService {
       return this.http.get<Producto>(`${this.API_URL}/buscador/${codigo}`,{headers});
    }
 
+   getUsuario(nomUsuario: string){
+      const headers = this.getbase64Credenciales();
+      return this.http.get<Usu>(`${this.API_URL}/buscadorusuario/${nomUsuario}`,{headers});
+   
+   }
 
    
    getProductoStock(codigo: number){

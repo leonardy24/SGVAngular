@@ -1,5 +1,5 @@
 main{
-    margin: 10px;
+    margin: 0 10px 10px 10px;
 }
 
   #tablaArticle{
@@ -39,6 +39,19 @@ main{
     
   }
 
+ .titulo-seccion {
+    font-size: 28px;
+    font-weight: 600;
+    color: #ffffff;
+    border-left: 6px solid #000000;
+    padding-left: 16px;
+    margin: 0px 0px 20px 0px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background:linear-gradient(90deg,#000000c4,#ffffff);
+    padding: 5px 5px;
+}
+
+
   
 
   .iva {
@@ -46,6 +59,7 @@ main{
     flex-direction: column;    /* Para apilar los elementos en columnas */
     align-items: flex-end;     /* Alinea todo a la derecha */
     gap: 10px;                 /* Espacio entre cada par de h2 + h3 */
+    margin-right: 30px;
 }
 
 .iva-item {
@@ -55,6 +69,13 @@ main{
 }
 
 .iva h3 {
+    border: 1px solid #333;    /* Borde visible */
+    padding: 20px 50px;         /* Espaciado interno para que se vea bien */
+    border-radius: 5px;        /* Bordes redondeados */
+    margin: 0;                 /* Elimina márgenes por defecto */
+}
+
+.iva #total{
     border: 1px solid #333;    /* Borde visible */
     padding: 20px 50px;         /* Espaciado interno para que se vea bien */
     border-radius: 5px;        /* Bordes redondeados */
@@ -119,8 +140,7 @@ main{
 }
 
 .buttonEfectivo-Tarjeta button {
-  margin-right: 10px;
-  margin-top: 10px;
+  margin:15px;
   padding: 60px;
   border-radius: 18px !important
 }
@@ -130,6 +150,8 @@ main{
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
+  margin-left: 18px;
+  margin-bottom: 20px;
 }
 
 .formulario-cambio {
@@ -146,3 +168,6 @@ main{
   
 }
 
+.filtro-card{
+  margin: 15px;
+}

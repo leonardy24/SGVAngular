@@ -1,0 +1,42 @@
+.filtro-card mat-form-field {
+  width: 100%;
+  max-width: 500px; /* O el ancho que prefieras para el selector de fecha */
+  margin-bottom: 10px;
+  margin-left: 15px;
+}
+
+.filtro-card .btn-pdf {
+  width: auto !important;
+  min-width: unset !important;
+  max-width: fit-content !important;
+  display: inline-flex;
+  margin-left: 15px;
+  margin-top: 10px;
+  align-items: center;
+  gap: 5px;
+}
+
+.filtro-card {
+    margin: 20px;
+}
+
+.boton-derecha {
+  text-align: right;
+  margin-right: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.resultado-card {
+  margin: 20px;
+  max-width: 600px;
+}
+
+
+.table-container {
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-radius: 6px;
+}

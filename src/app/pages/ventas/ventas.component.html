@@ -1,10 +1,14 @@
 <app-header></app-header>
-
+@if (cargando) {
+  <app-spinner-carga></app-spinner-carga>
+}
+<h2 class="titulo-seccion">Ventas de productos</h2>
 <main>
 
   
 
-    <h3>Ventas de productos</h3>
+    
+
 
     <!-- Formulario usando Angular Material -->
   <form [formGroup]="codidoForm" (submit)="buscarCodigo()" class="form-material">
@@ -109,7 +113,8 @@
             </table>
         </div><br>
     </article>
-    
+  
+   <mat-card class="filtro-card">
   <div>
     <!-- Botones de método de pago -->
     <form class="buttonEfectivo-Tarjeta">
@@ -128,8 +133,8 @@
         <h3>{{ geIvaTotal() }}</h3>
       </div>
       <div class="iva-item">
-        <h2>Total:</h2>
-        <h3>{{ totalVenta }}</h3>
+        <h1>Total:</h1>
+        <h2 id="total">{{ totalVenta }}</h2>
       </div>
     </div>
   </div>
@@ -152,7 +157,7 @@
       <form class="form-cambio">
         <mat-form-field appearance="outline" class="material-input">
           <mat-label>Efectivo</mat-label>
-          <input matInput type="number" [(ngModel)]="efectivoCambio" />
+          <input matInput type="number" [(ngModel)]="efectivoCambio" [ngModelOptions]="{standalone: true}" />
         </mat-form-field>
       </form>
       <div class="Cambio">
@@ -169,7 +174,7 @@
     <br />
   </div>
 
-
+  </mat-card>
       
 
 

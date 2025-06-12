@@ -1,4 +1,78 @@
-
 <app-header></app-header>
 
-<p>personal works!</p>
+<main>
+  <mat-card class="filtro-card">
+    <mat-card-header>
+      <mat-card-title>Buscar Usuario</mat-card-title>
+    </mat-card-header>
+
+    <!-- Campo de búsqueda -->
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre</mat-label>
+      <input matInput [(ngModel)]="nombreBuscado" placeholder="Ingresa el nombre del usuario">
+    </mat-form-field>
+
+
+  <div class="boton-derecha">
+      <button mat-raised-button color="primary" (click)="agregarUsuario()">
+        <mat-icon>search</mat-icon> Agregar 
+      </button>
+    </div>
+
+    <!-- Botón de búsqueda alineado a la derecha -->
+    <div class="boton-derecha">
+      <button mat-raised-button color="primary" (click)="buscarUsuario()">
+        <mat-icon>search</mat-icon> Buscar
+      </button>
+    </div>
+  </mat-card>
+
+  <!-- Resultado -->
+  @if (usuarioExiste) {
+    <mat-card class="resultado-card">
+      <mat-card-title>Datos del Usuario (editable)</mat-card-title>
+      <mat-card-content>
+        <div class="table-container">
+          <table mat-table [dataSource]="[usuario]" class="mat-elevation-z4">
+
+            <!-- ID -->
+            <ng-container matColumnDef="Id">
+              <th mat-header-cell *matHeaderCellDef> ID </th>
+              <td mat-cell *matCellDef="let user"> {{ user.id }} </td>
+            </ng-container>
+
+            <!-- Nombre editable -->
+            <ng-container matColumnDef="Nombre">
+              <th mat-header-cell *matHeaderCellDef> Nombre </th>
+              <td mat-cell *matCellDef="let user">
+                {{ user.nombre }}
+              </td>
+            </ng-container>
+
+            <!-- Rol editable -->
+            <ng-container matColumnDef="Rol">
+              <th mat-header-cell *matHeaderCellDef> Rol </th>
+              <td mat-cell *matCellDef="let user"
+                  contenteditable="true"
+                  (blur)="guardarCambio(user, $event, 'rol')">
+                {{ user.rol }}
+              </td>
+            </ng-container>
+
+            <!-- Fila -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+
+        <div class="boton-derecha">
+          <button mat-stroked-button color="accent" (click)="guardarUsuario()">
+            Guardar cambios
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  }
+  
+  
+</main>

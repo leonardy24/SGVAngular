@@ -13,10 +13,21 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDialog } from '@angular/material/dialog';
 import { FacturaPreviewComponent } from '../../componentes/factura-preview/factura-preview.component';
+import { SpinnerCargaComponent } from '../../componentes/spinner-carga/spinner-carga.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-ventas',
-  imports: [HeaderComponent,MatButtonModule,MatIconModule,MatButtonToggleModule, ReactiveFormsModule,FormsModule,MatFormFieldModule,MatInputModule,MatCardModule],
+  imports: [HeaderComponent,
+            MatButtonModule,
+            MatIconModule,
+            MatButtonToggleModule,
+            ReactiveFormsModule,
+            FormsModule,
+            MatFormFieldModule,
+            MatInputModule,
+            MatCardModule,
+            SpinnerCargaComponent],
   standalone: true,
   templateUrl: './ventas.component.html',
   styleUrl: './ventas.component.css'
@@ -26,13 +37,23 @@ export class VentasComponent {
   codidoForm: FormGroup;
   codigo: FormControl;
   productos: Producto[];
- 
+  cargando = false;
   totalVenta: number;
   iva: number;
   efectivoCambio: number;
   metodoDePago : string;
+  venta: Venta = {
+      metodoPago: '',
+      totalVenta: 0,
+      iva: 0,
+      productos: []
+  };
 
-  constructor(public userService: UserAuthService,private dialog: MatDialog){
+
+  constructor(
+    public userService: UserAuthService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar){
     this.productos = [];
     
     this.codigo = new FormControl('');
@@ -47,10 +68,11 @@ export class VentasComponent {
 
 
   buscarCodigo():void{
+      this.cargando = true;
       console.log(this.codidoForm.value.codigo);
       this.userService.getProducto(this.codidoForm.value.codigo).subscribe({
         next:(data)=>{
-          
+          this.cargando = false;
           this.productos.push(data);
           this.totalVenta = this.getTotalVenta();
           
@@ -58,6 +80,12 @@ export class VentasComponent {
         },
         error:(e)=>{
           console.log("no existe")
+          this.cargando = false;
+          this.snackBar.open('Producto no encontrado!', 'Cerrar', {
+              duration: 5000,
+              horizontalPosition: 'right',
+              verticalPosition: 'bottom',
+            });
         }
       })
 
@@ -77,24 +105,22 @@ export class VentasComponent {
 
   geIvaTotal(){
 
-    this.iva = this.getTotalVenta() *0.21;
+    const iva= this.iva = this.getTotalVenta() *0.21;
 
-    return this.iva;
+    return Math.round(iva * 100) / 100;;
   }
 
   getCambio(): number{
 
-    return this.efectivoCambio - this.getTotalVenta();
+     const cambio = this.efectivoCambio - this.getTotalVenta();
+     return Math.round(cambio * 100) / 100;
   }
 
 
   pagar(){
 
-    //podriasmos hacer una ventana que me salga con los todos los datos de compra y aceptar o cancelar, pero de momento
-    //lo voy hacer dierectio
-
-
-    const venta: Venta ={
+  
+     this.venta={
       metodoPago: this.metodoDePago,
       totalVenta: this.totalVenta,
       iva: this.iva,
@@ -102,7 +128,7 @@ export class VentasComponent {
     }
 
     
-    this.userService.getRegistroVenta(venta).subscribe({
+    this.userService.getRegistroVenta(this.venta).subscribe({
        next: (pdfBlob: Blob) => {
         const pdfUrl = URL.createObjectURL(pdfBlob);
         this.dialog.open(FacturaPreviewComponent, {
@@ -110,6 +136,19 @@ export class VentasComponent {
           width: '80%',
           height: '90%'
         });
+
+      this.venta={
+        metodoPago: '',
+        totalVenta: 0,
+        iva: 0,
+        productos: []
+      }
+      
+      this.metodoDePago= '';
+      this.totalVenta= 0;
+      this.iva = 0;
+      this.productos=[];
+
       },
       error: (err) => {
         console.error("Error al registrar venta o generar factura", err);

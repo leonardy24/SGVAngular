@@ -2,10 +2,12 @@
 .login-background {
   
    background: linear-gradient(90deg, #000000, #004718);
-  height: 100vh;
+   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 10px;
 }
 
 /* Tarjeta centrada con estilo vibrante */
@@ -47,4 +49,38 @@ mat-error {
   display: block;
   text-align: center;
   margin-top: 15px;
+}
+
+.login-footer {
+  margin-top: 40px;
+  text-align: center;
+  color: #ffffffcc; /* Blanco con algo de transparencia */
+  font-size: 14px;
+  padding: 20px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.login-footer p {
+  margin-bottom: 10px;
+}
+
+.login-footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.login-footer ul li {
+  display: inline;
+  margin: 0 10px;
+}
+
+.login-footer a {
+  color: #ffffffcc;
+  text-decoration: none;
+}
+
+.login-footer a:hover {
+  text-decoration: underline;
 }
