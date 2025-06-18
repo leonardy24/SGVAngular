@@ -23,7 +23,7 @@
 /* Título con color destacado */
 .login-title {
   text-align: center;
-  color: #4f00bc;
+  color: #13219d;
   margin-bottom: 30px;
   font-weight: bold;
 }
@@ -38,7 +38,7 @@
 button {
   width: 100%;
   
-  background: linear-gradient(90deg, #000000, #8b0360);
+  background: linear-gradient(90deg, #000000, #35353a);
   color: white;
   font-weight: bold;
 }

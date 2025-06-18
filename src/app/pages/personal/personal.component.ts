@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Usu } from '../../modelo/Usu';
 import { MatDialog } from '@angular/material/dialog';
 import { AgregarUsuarioComponent } from '../../componentes/agregar-usuario/agregar-usuario.component';
+import { SpinnerCargaComponent } from '../../componentes/spinner-carga/spinner-carga.component';
 
 @Component({
   selector: 'app-personal',
@@ -23,7 +24,8 @@ import { AgregarUsuarioComponent } from '../../componentes/agregar-usuario/agreg
     MatIconModule,
     MatButtonModule,
     FormsModule,
-    MatTableModule
+    MatTableModule,
+    SpinnerCargaComponent
     ],
   templateUrl: './personal.component.html',
   styleUrl: './personal.component.css'
@@ -47,7 +49,7 @@ displayedColumns: string[] = ['Id', 'Nombre', 'Rol'];
 
   buscarUsuario() {
     
-
+    this.cargando = true;
     this.userService.getUsuario(this.nombreBuscado).subscribe({
         next:(data)=>{
           this.cargando = false;

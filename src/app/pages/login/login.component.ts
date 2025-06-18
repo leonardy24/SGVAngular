@@ -46,6 +46,7 @@ export class LoginComponent {
           next:(data)=>{
             this.cargando = false;
             console.log("entro ")
+            this.userService.getGuardarUsuario(data)
             this.router.navigate(['/ventas']); // Usa router.navigate() para redirigir
           },
           error:(error: HttpErrorResponse)=>{

@@ -49,6 +49,7 @@ main{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background:linear-gradient(90deg,#000000c4,#ffffff);
     padding: 5px 5px;
+    padding-left: 20px;
 }
 
 

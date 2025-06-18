@@ -37,6 +37,8 @@
 /* Estilos para la tabla */
 .table-container {
   overflow-x: auto; /* Para responsive en tablas anchas */
+  max-height: 400px; /* o la altura que desees */
+  overflow-y: auto;
 }
 
 table.mat-table {
@@ -47,6 +49,7 @@ table.mat-table {
 .columna-monto {
   text-align: right; /* Alinear montos a la derecha */
   padding-right: 16px !important; /* Añadir padding para que no se pegue al borde */
+  
 }
 
 th.mat-header-cell.columna-monto {
@@ -67,6 +70,19 @@ th.mat-header-cell.columna-monto {
   border: 2px dashed #e0e0e0;
   border-radius: 8px;
   margin-top: 20px;
+}
+
+.titulo-seccion {
+    font-size: 28px;
+    font-weight: 600;
+    color: #ffffff;
+    border-left: 6px solid #000000;
+    padding-left: 16px;
+    margin: 0px 0px 20px 0px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background:linear-gradient(90deg,#000000c4,#ffffff);
+    padding: 5px 5px;
+    padding-left: 20px;
 }
 
 .sin-resultados mat-icon {

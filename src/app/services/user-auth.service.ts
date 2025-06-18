@@ -15,10 +15,12 @@ import { UsuarioLogin } from '../modelo/UsuarioLogin';
   providedIn: 'root'
 })
 export class UserAuthService {
-   API_URL ='http://localhost:8080/auth';
-   //API_URL = 'http://ec2-15-188-65-191.eu-west-3.compute.amazonaws.com:8080/auth'
+   //API_URL ='http://localhost:8080/auth';
+   API_URL = 'http://ec2-15-188-65-191.eu-west-3.compute.amazonaws.com:8080/auth'
    usuario: UsuarioLogin | undefined;
    
+   usuDTO : Usu | undefined;
+
   constructor(private http: HttpClient) {
    
    }
@@ -30,8 +32,20 @@ export class UserAuthService {
       console.log(usu.password)
       
       const headers = this.getbase64Credenciales();
+      
+      return this.http.post<Usu>(`${this.API_URL}/login`,{},{ headers });
+       
+   }
 
-      return this.http.post<any>(`${this.API_URL}/login`,{},{ headers });
+   //ESTE METODO LO UTILIZO PARA GUARDAR EL VALOR DEL USUARIO,
+   //PARA VERIFICAR QUE ROL TIENE, Y PODER ACCEDER A LAS DEMAS PAGINAS
+   getGuardarUsuario(usuDTO: Usu){
+      this.usuDTO = usuDTO;
+   }
+
+   //RETORNA EL USUARIO ACTUAL
+   getUsuarioActual(){
+      return this.usuDTO;
    }
 
 

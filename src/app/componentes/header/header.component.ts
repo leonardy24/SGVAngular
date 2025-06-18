@@ -4,7 +4,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { SpinnerCargaComponent } from '../../componentes/spinner-carga/spinner-carga.component';
+
 
 @Component({
   selector: 'app-header',
@@ -14,7 +14,7 @@ import { SpinnerCargaComponent } from '../../componentes/spinner-carga/spinner-c
     MatMenuModule,
     MatButtonModule,
     MatIconModule,
-    SpinnerCargaComponent
+    
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'

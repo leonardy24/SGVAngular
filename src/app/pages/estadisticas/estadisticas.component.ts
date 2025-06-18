@@ -132,29 +132,26 @@ export class EstadisticasComponent implements OnInit {
     }
 
     // SI LLEGUE HASTA AQUI, ES PORQUE LAS FECHAS SON CORRECTAS
-   
+    this.cargando= true;
 
     //le paso las fechas directamente en string
     this.userService.getVentasService(start, end).subscribe({
+        
         next:(data)=>{
-
+          this.ventasFiltradas = data;
           //console.log("producto actulizado");
-          this.snackBar.open('Producto Actualizado', 'Cerrar', {
-              duration: 5000,
-              horizontalPosition: 'right',
-              verticalPosition: 'bottom',
-            });
-            //this.cargando= false, esto es para que me aparezca la cosa de cargando
-            this.ventasFiltradas = data;
+          
+            this.cargando= false;
+            
         },
         error:(e)=>{
           //console.log("error al actualizar el prodcuto")
-          this.snackBar.open('ERROR al actualizar el producto', 'Cerrar', {
+          this.snackBar.open('ERROR 500', 'Cerrar', {
               duration: 5000,
               horizontalPosition: 'right',
               verticalPosition: 'bottom',
             });
-            //this.cargando= false, esto es para que me aparezca la cosa de cargando
+            this.cargando= false
         }
       })
     /*
@@ -174,9 +171,7 @@ export class EstadisticasComponent implements OnInit {
       */
     //this.ventasFiltradas = filtered;
 
-    if (this.ventasFiltradas.length === 0 && this.searchAttempted) {
-        this._snackBar.open('No se encontraron ventas para el rango seleccionado.', 'Cerrar', { duration: 3000 });
-    }
+    
   }
 
   limpiarFiltro(): void {

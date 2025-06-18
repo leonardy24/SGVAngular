@@ -35,6 +35,19 @@ main{
     padding: 20px;
 }
 
+.titulo-seccion {
+    font-size: 28px;
+    font-weight: 600;
+    color: #ffffff;
+    border-left: 6px solid #000000;
+    padding-left: 16px;
+    margin: 0px 0px 20px 0px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background:linear-gradient(90deg,#000000c4,#ffffff);
+    padding: 5px 5px;
+    padding-left: 20px;
+}
+
 .icon-rojo {
   color: red;
 }

@@ -127,9 +127,10 @@ export class VentasComponent {
       productos: this.productos
     }
 
-    
+    this.cargando= true;
     this.userService.getRegistroVenta(this.venta).subscribe({
        next: (pdfBlob: Blob) => {
+        this.cargando= false;
         const pdfUrl = URL.createObjectURL(pdfBlob);
         this.dialog.open(FacturaPreviewComponent, {
           data: { pdfUrl: pdfUrl },
@@ -152,6 +153,12 @@ export class VentasComponent {
       },
       error: (err) => {
         console.error("Error al registrar venta o generar factura", err);
+        this.cargando = false;
+          this.snackBar.open('Error al registrar la venta!', 'Cerrar', {
+              duration: 5000,
+              horizontalPosition: 'right',
+              verticalPosition: 'bottom',
+            });
       }
     })
 

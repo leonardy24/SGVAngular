@@ -11,7 +11,12 @@
   box-sizing: border-box;
   width: 100%; /* Asegura ocupar todo el ancho */
 }
-
+.app-icon {
+  width: 120px;
+  height: 80px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
 .toolbar-header {
   display: flex;
   align-items: center;
